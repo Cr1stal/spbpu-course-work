@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import QMainWindow
-from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout
+from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QFormLayout
 from PySide6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QComboBox, QSpinBox, QCheckBox
 
 from fields.gender_field import GenderField
@@ -28,47 +28,47 @@ class MainWindow(QMainWindow):
                 'Body Mass Index'
                 ]
 
-        layout = QVBoxLayout()
+        form = QFormLayout()
 
         # Gender field
-        widget = GenderField()
-        layout.addWidget(widget)
+        self.gender = GenderField()
+        form.addRow(QLabel('Gender'), self.gender)
 
         # Age field
-        widget = AgeField()
-        layout.addWidget(widget)
+        self.age = AgeField()
+        form.addRow(QLabel('Age'), self.age)
 
         # Hypertension field
-        widget = HypertensionField()
-        layout.addWidget(widget)
+        self.hypertension = HypertensionField()
+        form.addRow(QLabel('Hypertension'), self.hypertension)
 
         # Heart Disease field
-        widget = HeartDiseaseField()
-        layout.addWidget(widget)
+        self.heart_disease = HeartDiseaseField()
+        form.addRow(QLabel('Heart Disease'), self.heart_disease)
 
         # Ever married field
-        widget = EverMarriedField()
-        layout.addWidget(widget)
+        self.ever_married = EverMarriedField()
+        form.addRow(QLabel('Ever married'), self.ever_married)
 
         # Work Type field
-        widget = WorkTypeField()
-        layout.addWidget(widget)
+        self.work_type = WorkTypeField()
+        form.addRow(QLabel('Work Type'), self.work_type)
 
         # Residence Type field
-        widget = ResidenceTypeField()
-        layout.addWidget(widget)
+        self.residence_type = ResidenceTypeField()
+        form.addRow(QLabel('Residence Type'), self.residence_type)
 
         # Average Glucose Level field
-        widget = AverageGlucoseLevelField()
-        layout.addWidget(widget)
+        self.average_glucose_level = AverageGlucoseLevelField()
+        form.addRow(QLabel('Average Glucose Level'), self.average_glucose_level)
 
         # Body Mass Index field
-        widget = BodyMassIndexField()
-        layout.addWidget(widget)
+        self.body_mass_index = BodyMassIndexField()
+        form.addRow(QLabel('Body Mass Index'), self.body_mass_index)
 
         # Submit button
-        layout.addWidget(QPushButton('Predict'))
+        form.addWidget(QPushButton('Predict'))
 
         widget = QWidget()
-        widget.setLayout(layout)
+        widget.setLayout(form)
         self.setCentralWidget(widget)
