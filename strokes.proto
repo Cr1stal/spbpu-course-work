@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.strokes.grpc";
+option java_outer_classname = "StrokeProto";
+option objc_class_prefix = "HLW";
+
+package strokes;
+
+service StrokeDetection {
+  rpc Predict (StrokeRequest) returns (StrokeReply) {}
+}
+
+message StrokeRequest {
+  bool   gender = 1;
+  uint32 age    = 2;
+  bool   hypertension  = 3;
+  bool   heart_disease = 4;
+  bool   ever_married = 5;
+  string work_type = 6;
+  string residence_type = 7;
+  uint32 average_glucose_level = 8;
+  uint32 body_mass_index = 9;
+}
+
+message StrokeReply {
+  uint32 result = 1;
+}
