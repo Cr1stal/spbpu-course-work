@@ -2,15 +2,15 @@ from PySide6.QtWidgets import QMainWindow
 from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout
 from PySide6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QComboBox, QSpinBox, QCheckBox
 
-from gender_field import GenderField
-from age_field import AgeField
-from hypertension_field import HypertensionField
-from heart_disease_field import HeartDiseaseField
-from ever_married_field import EverMarriedField
-from work_type_field import WorkTypeField
-from residence_type_field import ResidenceTypeField
-from average_glucose_level_field import AverageGlucoseLevelField
-from body_mass_index_field import BodyMassIndexField
+from fields.gender_field import GenderField
+from fields.age_field import AgeField
+from fields.hypertension_field import HypertensionField
+from fields.heart_disease_field import HeartDiseaseField
+from fields.ever_married_field import EverMarriedField
+from fields.work_type_field import WorkTypeField
+from fields.residence_type_field import ResidenceTypeField
+from fields.average_glucose_level_field import AverageGlucoseLevelField
+from fields.body_mass_index_field import BodyMassIndexField
 
 class MainWindow(QMainWindow):
     def __init__(self):
