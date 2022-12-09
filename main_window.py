@@ -1,5 +1,5 @@
 from PySide6.QtCore import QSize, Qt
-from PySide6.QtWidgets import QMainWindow
+from PySide6.QtWidgets import QMainWindow, QMessageBox
 from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QFormLayout
 from PySide6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QComboBox, QSpinBox, QCheckBox
 
@@ -14,6 +14,8 @@ from fields.average_glucose_level_field import AverageGlucoseLevelField
 from fields.body_mass_index_field import BodyMassIndexField
 
 from client import Client
+
+from grpc._channel import _InactiveRpcError
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -93,7 +95,8 @@ class MainWindow(QMainWindow):
         body_mass_index_value = int(self.body_mass_index.value() * 100)
 
         client = Client()
-        client.run(
+        try:
+          response = client.run(
                 gender_arg=gender_value,
                 age_arg=age_value,
                 hypertension_arg=hypertension_value,
@@ -105,3 +108,23 @@ class MainWindow(QMainWindow):
                 body_mass_index_arg=body_mass_index_value
                 )
 
+          dlg = QMessageBox(self)
+          dlg.setWindowTitle('Result of work')
+
+          if response.result == 21:
+            dlg.setIcon(QMessageBox.Warning)
+            dlg.setText('You have a high probability of stroke. You need to see a doctor ASAP')
+          else:
+            dlg.setIcon(QMessageBox.Information)
+            dlg.setText('You have a low probability of stroke. Do some regular check-ups and everything will be fine')
+
+          dlg.setStandardButtons(QMessageBox.Close)
+
+          dlg.exec()
+        except _InactiveRpcError:
+          dlg = QMessageBox(self)
+          dlg.setWindowTitle('Error is happened')
+          dlg.setText('Server is unavailable')
+          dlg.setIcon(QMessageBox.Critical)
+          dlg.setStandardButtons(QMessageBox.Close)
+          dlg.exec()
