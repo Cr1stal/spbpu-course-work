@@ -1,8 +1,7 @@
 from PySide6.QtCore import QSize, Qt
 from PySide6.QtWidgets import QMainWindow
 from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QFormLayout
-from PySide6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QComboBox, QSpinBox, QCheckBox, QDataWidgetMapper
-from PySide6.QtSql import QSqlTableModel
+from PySide6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QComboBox, QSpinBox, QCheckBox
 
 from fields.gender_field import GenderField
 from fields.age_field import AgeField
@@ -17,7 +16,7 @@ from fields.body_mass_index_field import BodyMassIndexField
 from client import Client
 
 class MainWindow(QMainWindow):
-    def __init__(self, db_arg):
+    def __init__(self):
         super().__init__()
 
         self.names = [
@@ -75,24 +74,6 @@ class MainWindow(QMainWindow):
         submit_btn.clicked.connect(self.submit_button_clicked)
         form.addWidget(submit_btn)
 
-        self.model = QSqlTableModel(db=db_arg)
-
-        self.mapper = QDataWidgetMapper()
-        self.mapper.setSubmitPolicy(QDataWidgetMapper.ManualSubmit)
-        self.mapper.setModel(self.model)
-
-        self.mapper.addMapping(self.gender, 0)
-        self.mapper.addMapping(self.age, 1)
-        self.mapper.addMapping(self.hypertension, 2)
-        self.mapper.addMapping(self.heart_disease, 3)
-        self.mapper.addMapping(self.ever_married, 4)
-        self.mapper.addMapping(self.work_type, 5)
-        self.mapper.addMapping(self.residence_type, 6)
-        self.mapper.addMapping(self.average_glucose_level, 7)
-        self.mapper.addMapping(self.body_mass_index, 8)
-
-        self.model.setTable("strokes_data")
-
         self.setMinimumSize(QSize(400, 400))
         self.setWindowTitle('Stroke prediction app')
 
@@ -101,8 +82,6 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(widget)
 
     def submit_button_clicked(self):
-        self.mapper.submit()
-
         gender_value = (str(self.gender.currentText()) == 'Male')
         age_value = int(self.age.value())
         hypertension_value = self.hypertension.isChecked()
