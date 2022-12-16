@@ -4,4 +4,10 @@ class GenderField(QComboBox):
     def __init__(self):
         super().__init__()
 
-        self.addItems(['Male', 'Female'])
+        self.displayable_values = ['Male', 'Female']
+        self.returnable_values = ['male', 'female']
+
+        self.addItems(self.displayable_values)
+
+    def currentReturnValue(self):
+        return self.returnable_values[self.currentIndex()]

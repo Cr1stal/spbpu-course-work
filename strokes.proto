@@ -12,15 +12,16 @@ service StrokeDetection {
 }
 
 message StrokeRequest {
-  bool   gender = 1;
+  string gender = 1;
   uint32 age    = 2;
   bool   hypertension  = 3;
   bool   heart_disease = 4;
-  bool   ever_married = 5;
+  string ever_married = 5;
   string work_type = 6;
   string residence_type = 7;
   uint32 average_glucose_level = 8;
   uint32 body_mass_index = 9;
+  string smoking_status = 10;
 }
 
 message StrokeReply {

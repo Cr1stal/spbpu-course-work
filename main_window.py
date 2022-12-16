@@ -12,6 +12,7 @@ from fields.work_type_field import WorkTypeField
 from fields.residence_type_field import ResidenceTypeField
 from fields.average_glucose_level_field import AverageGlucoseLevelField
 from fields.body_mass_index_field import BodyMassIndexField
+from fields.smoking_status_field import SmokingStatusField
 
 from client import Client
 
@@ -20,18 +21,6 @@ from grpc._channel import _InactiveRpcError
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-
-        self.names = [
-                'Gender',
-                'Age',
-                'Hypertension',
-                'Heart Disease',
-                'Ever Married',
-                'Work Type',
-                'Residence Type',
-                'Average Glucose Level',
-                'Body Mass Index'
-                ]
 
         form = QFormLayout()
 
@@ -71,6 +60,10 @@ class MainWindow(QMainWindow):
         self.body_mass_index = BodyMassIndexField()
         form.addRow(QLabel('Body Mass Index'), self.body_mass_index)
 
+        # Smoking Status field
+        self.smoking_status = SmokingStatusField()
+        form.addRow(QLabel('Smoking Status'), self.smoking_status)
+
         # Submit button
         submit_btn = QPushButton('Predict')
         submit_btn.clicked.connect(self.submit_button_clicked)
@@ -84,15 +77,16 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(widget)
 
     def submit_button_clicked(self):
-        gender_value = (str(self.gender.currentText()) == 'Male')
+        gender_value = self.gender.currentReturnValue()
         age_value = int(self.age.value())
         hypertension_value = self.hypertension.isChecked()
         heart_disease_value = self.heart_disease.isChecked()
-        ever_married_value = (str(self.ever_married.currentText()) == 'Yes')
-        work_type_value = str(self.work_type.currentText())
-        residence_type_value = str(self.residence_type.currentText())
+        ever_married_value = self.ever_married.currentReturnValue()
+        work_type_value = self.work_type.currentReturnValue()
+        residence_type_value = self.residence_type.currentReturnValue()
         average_glucose_level_value = int(self.average_glucose_level.value() * 100)
         body_mass_index_value = int(self.body_mass_index.value() * 100)
+        smoking_status_value = self.smoking_status.currentReturnValue()
 
         client = Client()
         try:
@@ -105,13 +99,14 @@ class MainWindow(QMainWindow):
                 work_type_arg=work_type_value,
                 residence_type_arg=residence_type_value,
                 average_glucose_level_arg=average_glucose_level_value,
-                body_mass_index_arg=body_mass_index_value
+                body_mass_index_arg=body_mass_index_value,
+                smoking_status_arg=smoking_status_value
                 )
 
           dlg = QMessageBox(self)
           dlg.setWindowTitle('Result of work')
 
-          if response.result == 21:
+          if response.result == 1:
             dlg.setIcon(QMessageBox.Warning)
             dlg.setText('You have a high probability of stroke. You need to see a doctor ASAP')
           else:

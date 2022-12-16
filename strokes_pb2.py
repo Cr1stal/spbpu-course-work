@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rstrokes.proto\x12\x07strokes\"\xd2\x01\n\rStrokeRequest\x12\x0e\n\x06gender\x18\x01 \x01(\x08\x12\x0b\n\x03\x61ge\x18\x02 \x01(\r\x12\x14\n\x0chypertension\x18\x03 \x01(\x08\x12\x15\n\rheart_disease\x18\x04 \x01(\x08\x12\x14\n\x0c\x65ver_married\x18\x05 \x01(\x08\x12\x11\n\twork_type\x18\x06 \x01(\t\x12\x16\n\x0eresidence_type\x18\x07 \x01(\t\x12\x1d\n\x15\x61verage_glucose_level\x18\x08 \x01(\r\x12\x17\n\x0f\x62ody_mass_index\x18\t \x01(\r\"\x1d\n\x0bStrokeReply\x12\x0e\n\x06result\x18\x01 \x01(\r2L\n\x0fStrokeDetection\x12\x39\n\x07Predict\x12\x16.strokes.StrokeRequest\x1a\x14.strokes.StrokeReply\"\x00\x42\'\n\x10\x63om.strokes.grpcB\x0bStrokeProtoP\x01\xa2\x02\x03HLWb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rstrokes.proto\x12\x07strokes\"\xea\x01\n\rStrokeRequest\x12\x0e\n\x06gender\x18\x01 \x01(\t\x12\x0b\n\x03\x61ge\x18\x02 \x01(\r\x12\x14\n\x0chypertension\x18\x03 \x01(\x08\x12\x15\n\rheart_disease\x18\x04 \x01(\x08\x12\x14\n\x0c\x65ver_married\x18\x05 \x01(\t\x12\x11\n\twork_type\x18\x06 \x01(\t\x12\x16\n\x0eresidence_type\x18\x07 \x01(\t\x12\x1d\n\x15\x61verage_glucose_level\x18\x08 \x01(\r\x12\x17\n\x0f\x62ody_mass_index\x18\t \x01(\r\x12\x16\n\x0esmoking_status\x18\n \x01(\t\"\x1d\n\x0bStrokeReply\x12\x0e\n\x06result\x18\x01 \x01(\r2L\n\x0fStrokeDetection\x12\x39\n\x07Predict\x12\x16.strokes.StrokeRequest\x1a\x14.strokes.StrokeReply\"\x00\x42\'\n\x10\x63om.strokes.grpcB\x0bStrokeProtoP\x01\xa2\x02\x03HLWb\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'strokes_pb2', globals())
@@ -22,9 +22,9 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'\n\020com.strokes.grpcB\013StrokeProtoP\001\242\002\003HLW'
   _STROKEREQUEST._serialized_start=27
-  _STROKEREQUEST._serialized_end=237
-  _STROKEREPLY._serialized_start=239
-  _STROKEREPLY._serialized_end=268
-  _STROKEDETECTION._serialized_start=270
-  _STROKEDETECTION._serialized_end=346
+  _STROKEREQUEST._serialized_end=261
+  _STROKEREPLY._serialized_start=263
+  _STROKEREPLY._serialized_end=292
+  _STROKEDETECTION._serialized_start=294
+  _STROKEDETECTION._serialized_end=370
 # @@protoc_insertion_point(module_scope)
